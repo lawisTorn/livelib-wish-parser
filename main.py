@@ -11,6 +11,9 @@ for x in range(1, pages + 1):
     if response.status_code == 200:
         data = response.text
         soup = BeautifulSoup(data, 'lxml')
-        print(soup.prettify())
+        name_books = soup.find_all('a', class_='brow-book-name with-cycle')
+        
+        for book in name_books:
+            print(book.get('href'), book.text)
     else:
         print(f"Failed to retrieve page {x}")
