@@ -12,8 +12,14 @@ for x in range(1, pages + 1):
         data = response.text
         soup = BeautifulSoup(data, 'lxml')
         name_books = soup.find_all('a', class_='brow-book-name with-cycle')
-        
         for book in name_books:
-            print(book.get('href'), book.text)
+            book_title = book.text
+            book_authors = []
+            parent_element = book.find_parent('div', class_='brow-data')
+            if parent_element:
+                authors = parent_element.find_all('a', class_='brow-book-author')
+                for author in authors:
+                    book_authors.append(author.text)
+            print(f"Book: {book_title} - Authors: {', '.join(book_authors)}")
     else:
         print(f"Failed to retrieve page {x}")
