@@ -18,3 +18,6 @@
 
     pip install lxml
 
+6. install pandas:
+   
+   pip install pandas openpyxl
